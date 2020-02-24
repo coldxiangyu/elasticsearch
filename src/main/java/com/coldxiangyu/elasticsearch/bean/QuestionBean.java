@@ -1,7 +1,12 @@
 package com.coldxiangyu.elasticsearch.bean;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
 
 @Document(indexName = "qa_question", type = "_doc")
 public class QuestionBean {
@@ -11,12 +16,14 @@ public class QuestionBean {
     private String applyTopic;
     private String questionDetail;
     private String state;
-    private String createDate;
-    private String modifyDate;
+    @Field(type = FieldType.Date , format= DateFormat.custom , pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createDate;
+    @Field(type = FieldType.Date , format= DateFormat.custom , pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifyDate;
 
     public QuestionBean(){}
 
-    public QuestionBean(String id, String questionType, String applyTopic, String questionDetail, String state, String createDate, String modifyDate) {
+    public QuestionBean(String id, String questionType, String applyTopic, String questionDetail, String state, Date createDate, Date modifyDate) {
         this.id = id;
         this.questionType = questionType;
         this.applyTopic = applyTopic;
@@ -66,19 +73,19 @@ public class QuestionBean {
         this.state = state;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public String getModifyDate() {
+    public Date getModifyDate() {
         return modifyDate;
     }
 
-    public void setModifyDate(String modifyDate) {
+    public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
 
@@ -90,8 +97,8 @@ public class QuestionBean {
                 ", applyTopic='" + applyTopic + '\'' +
                 ", questionDetail='" + questionDetail + '\'' +
                 ", state='" + state + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", modifyDate='" + modifyDate + '\'' +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
                 '}';
     }
 }

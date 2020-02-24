@@ -1,7 +1,12 @@
 package com.coldxiangyu.elasticsearch.bean;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
 
 @Document(indexName = "qa_question_response", type = "_doc")
 public class QuestionResponseBean {
@@ -10,13 +15,15 @@ public class QuestionResponseBean {
     private String questionId;
     private String replierId;
     private String applicantTeam;
-    private String replyDate;
+    @Field(type = FieldType.Date , format= DateFormat.custom , pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date replyDate;
     private String content;
-    private String updateDate;
+    @Field(type = FieldType.Date , format= DateFormat.custom , pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateDate;
 
     public QuestionResponseBean(){}
 
-    public QuestionResponseBean(String id, String questionId, String replierId, String applicantTeam, String replyDate, String content, String updateDate) {
+    public QuestionResponseBean(String id, String questionId, String replierId, String applicantTeam, Date replyDate, String content, Date updateDate) {
         this.id = id;
         this.questionId = questionId;
         this.replierId = replierId;
@@ -58,11 +65,11 @@ public class QuestionResponseBean {
         this.applicantTeam = applicantTeam;
     }
 
-    public String getReplyDate() {
+    public Date getReplyDate() {
         return replyDate;
     }
 
-    public void setReplyDate(String replyDate) {
+    public void setReplyDate(Date replyDate) {
         this.replyDate = replyDate;
     }
 
@@ -74,11 +81,11 @@ public class QuestionResponseBean {
         this.content = content;
     }
 
-    public String getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -89,9 +96,9 @@ public class QuestionResponseBean {
                 ", questionId='" + questionId + '\'' +
                 ", replierId='" + replierId + '\'' +
                 ", applicantTeam='" + applicantTeam + '\'' +
-                ", replyDate='" + replyDate + '\'' +
+                ", replyDate=" + replyDate +
                 ", content='" + content + '\'' +
-                ", updateDate='" + updateDate + '\'' +
+                ", updateDate=" + updateDate +
                 '}';
     }
 }

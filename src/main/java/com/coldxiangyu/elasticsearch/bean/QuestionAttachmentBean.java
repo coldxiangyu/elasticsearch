@@ -1,7 +1,12 @@
 package com.coldxiangyu.elasticsearch.bean;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
 
 @Document(indexName = "qa_question_attachment", type = "_doc")
 public class QuestionAttachmentBean {
@@ -10,11 +15,12 @@ public class QuestionAttachmentBean {
     private String questionId;
     private String name;
     private String path;
-    private String uploadDate;
+    @Field(type = FieldType.Date , format= DateFormat.custom , pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date uploadDate;
 
     public QuestionAttachmentBean(){}
 
-    public QuestionAttachmentBean(String id, String questionId, String name, String path, String uploadDate) {
+    public QuestionAttachmentBean(String id, String questionId, String name, String path, Date uploadDate) {
         this.id = id;
         this.questionId = questionId;
         this.name = name;
@@ -54,11 +60,11 @@ public class QuestionAttachmentBean {
         this.path = path;
     }
 
-    public String getUploadDate() {
+    public Date getUploadDate() {
         return uploadDate;
     }
 
-    public void setUploadDate(String uploadDate) {
+    public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
     }
 

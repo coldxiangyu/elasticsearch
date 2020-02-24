@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +28,7 @@ public class ElasticController {
     @RequestMapping("/save")
     @ResponseBody
     public void save() {
-        QuestionBean questionBean = new QuestionBean("1", "java", "elasticsearch技术", "哒哒哒哒哒哒多多多多多多多多多多多多多多多多多多多多多多多多", "1", "2020-02-22", "2020-02-22");
+        QuestionBean questionBean = new QuestionBean("1", "java", "elasticsearch技术", "哒哒哒哒哒哒多多多多多多多多多多多多多多多多多多多多多多多多", "1", new Date(), new Date());
         System.out.println(questionBean);
         questionService.save(questionBean);
     }
